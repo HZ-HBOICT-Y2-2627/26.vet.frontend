@@ -35,7 +35,7 @@
     </nav>
 
     <div class="hidden md:inline-block">
-      <Button href="#book" size="sm">Book appointment</Button>
+      <Button href="#book" size="sm" label="Book appointment" />
     </div>
 
     <button

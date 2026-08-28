@@ -74,6 +74,19 @@ tends to surface — the right response is to document it (here) and make a call
 silently let it drift, and not to over-engineer a prop to preserve an inconsistency nobody
 asked for.
 
+**Why `Button` and `Badge` take a `label`/`text` prop instead of children.** An earlier
+version of this solution had `Button` and `Badge` accept their text as children (Svelte 5
+"snippets": `<Button href="#book">Book now</Button>`, rendered inside with
+`{@render children()}`). That's idiomatic Svelte and worth knowing exists, but it's an extra
+concept on top of everything else in this lesson, and every piece of button/badge text on
+this page happens to be plain text — no icon, no inline markup — so there's nothing children
+buy here that a `label: string` prop doesn't. Swapped to props for that reason; see
+`docs/svelte-component-basics.md` §6 for how this is framed to students. Similarly, the
+variant/size lookup objects in `Button` and `NavLink` are plain object literals (TypeScript
+infers their shape and checks the lookup is exhaustive on its own) rather than being annotated
+with `Record<NonNullable<Props['variant']>, string>` — same information, far less to parse for
+someone reading their first few `.svelte` files.
+
 **Where "no visual regression" was checked.** `docs/screenshots/homepage-desktop.png` and
 `homepage-mobile.png` were compared against renders of this branch at the same widths, plus
 the mobile menu open state and a changed appointment-type selection (to confirm the extracted

@@ -14,6 +14,6 @@
   <h3 class="mt-4 text-lg font-semibold text-slate-900">{service.title}</h3>
   <p class="mt-2 text-sm text-slate-600">{service.description}</p>
   <div class="mt-4">
-    <Badge>~{service.duration}</Badge>
+    <Badge text="~{service.duration}" />
   </div>
 </div>

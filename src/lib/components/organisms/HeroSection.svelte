@@ -14,8 +14,8 @@
         for dogs, cats, rabbits and more for over 18 years.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
-        <Button href="#book">Book an appointment</Button>
-        <Button href="#portal" variant="outline">View my pet's records</Button>
+        <Button href="#book" label="Book an appointment" />
+        <Button href="#portal" variant="outline" label="View my pet's records" />
       </div>
     </div>
     <div class="flex justify-center">
