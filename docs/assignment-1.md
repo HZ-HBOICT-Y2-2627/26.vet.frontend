@@ -43,6 +43,11 @@ Open the running site and open [`src/App.svelte`](../src/App.svelte) side by sid
 duration badge exists) to judge what a component's *responsibility* should be, not just where
 the `<div>` tags happen to fall.
 
+New to Svelte? Read [`svelte-component-basics.md`](./svelte-component-basics.md) first — a
+short translation guide from general programming knowledge to Svelte's specific syntax
+(props, `{#each}`/`{#if}`, and just enough of a preview of `$state`/`$derived` to get through
+this assignment before we cover reactivity properly next lesson).
+
 ---
 
 ## Part A — In class: find the components (no code yet)
