@@ -38,9 +38,11 @@ src/
   App.svelte        # homepage — currently one monolithic file, see Assignment 1
   app.css           # Tailwind import + design tokens (colors, fonts)
   lib/
-    components/      # your extracted components go here
+    components/      # your extracted components go here, grouped as
+                      # atoms/, molecules/, organisms/ — see Assignment 1
 docs/
   design.md          # design spec for the site
   assignment-1.md     # Lesson 1 assignment
   screenshots/        # reference renders of the approved design
+  submissions/         # your component tree + reflection notes go here
 ```

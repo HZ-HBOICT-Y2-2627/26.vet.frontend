@@ -76,7 +76,28 @@ reasonable tree.
 ## Part B — In class + homework: build it
 
 Starting from your Part A tree (revise it if building reveals a better boundary — that's
-normal), extract components into `src/lib/components/`. One `.svelte` file per component.
+normal), extract components into `src/lib/components/`. One `.svelte` file per component,
+placed in a subfolder that matches the tier you assigned it in Part A:
+
+```text
+src/lib/components/
+  atoms/        Button.svelte, Badge.svelte, NavLink.svelte, ...
+  molecules/    ServiceCard.svelte, AppointmentTypeSelect.svelte, ...
+  organisms/    SiteHeader.svelte, ServicesSection.svelte, ...
+```
+
+This isn't a Svelte convention — Svelte doesn't care where a file lives. It's a project
+convention we're adopting *because* this lesson is specifically about the atomic-design
+vocabulary: putting a component in `molecules/` forces you to commit to a classification
+instead of leaving it implicit. When you genuinely can't decide which folder a component
+belongs in, that's not a sign you're doing it wrong — it's usually a sign the component
+itself is doing two things at once, which is worth noticing regardless of folder.
+
+Don't over-invest in getting the tier "right." Plenty of real codebases skip this three-way
+split entirely and use two buckets instead — a `ui/` folder for generic, reusable primitives
+with no page/content knowledge, and everything else grouped by page or feature — precisely
+because the atom-vs-molecule line is often debatable. Atomic design is a thinking tool for
+this exercise, not a permanent architecture decision.
 
 **Minimum required extractions** — your tree should end up including at least these, though
 naming and exact prop shapes are your call:
