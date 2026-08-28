@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { AppointmentType } from '../data';
-  import { emergencyPhone } from '../data';
-  import AppointmentTypeSelect from './AppointmentTypeSelect.svelte';
+  import type { AppointmentType } from '../../data';
+  import { emergencyPhone } from '../../data';
+  import AppointmentTypeSelect from '../molecules/AppointmentTypeSelect.svelte';
 
   interface Props {
     appointmentTypes: AppointmentType[];

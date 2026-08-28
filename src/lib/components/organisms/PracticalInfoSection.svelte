@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { OpeningHoursRow } from '../data';
-  import OpeningHoursTable from './OpeningHoursTable.svelte';
+  import type { OpeningHoursRow } from '../../data';
+  import OpeningHoursTable from '../molecules/OpeningHoursTable.svelte';
 
   interface Props {
     openingHours: OpeningHoursRow[];

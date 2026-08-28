@@ -2,7 +2,7 @@
   // The dropdown and the derived duration text are one interaction — they
   // stay in the same component rather than being split across two.
   import { untrack } from 'svelte';
-  import type { AppointmentType } from '../data';
+  import type { AppointmentType } from '../../data';
 
   interface Props {
     types: AppointmentType[];

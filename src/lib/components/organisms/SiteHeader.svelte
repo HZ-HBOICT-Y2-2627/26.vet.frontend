@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { NavLink as NavLinkData } from '../data';
-  import { emergencyPhone } from '../data';
-  import NavLink from './NavLink.svelte';
-  import Button from './Button.svelte';
+  import type { NavLink as NavLinkData } from '../../data';
+  import { emergencyPhone } from '../../data';
+  import NavLink from '../atoms/NavLink.svelte';
+  import Button from '../atoms/Button.svelte';
 
   interface Props {
     links: NavLinkData[];

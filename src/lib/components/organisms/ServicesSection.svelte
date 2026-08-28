@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Service } from '../data';
-  import ServiceCard from './ServiceCard.svelte';
+  import type { Service } from '../../data';
+  import ServiceCard from '../molecules/ServiceCard.svelte';
 
   interface Props {
     services: Service[];

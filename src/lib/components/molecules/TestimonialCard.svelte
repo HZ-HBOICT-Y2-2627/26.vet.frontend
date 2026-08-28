@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Testimonial } from '../data';
+  import type { Testimonial } from '../../data';
 
   interface Props {
     testimonial: Testimonial;

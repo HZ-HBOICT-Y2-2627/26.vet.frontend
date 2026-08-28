@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { TrustStat } from '../data';
-  import TrustStatItem from './TrustStatItem.svelte';
+  import type { TrustStat } from '../../data';
+  import TrustStatItem from '../atoms/TrustStatItem.svelte';
 
   interface Props {
     stats: TrustStat[];

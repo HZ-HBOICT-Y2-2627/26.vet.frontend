@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from './Button.svelte';
+  import Button from '../atoms/Button.svelte';
 </script>
 
 <section id="home" class="bg-primary-50">

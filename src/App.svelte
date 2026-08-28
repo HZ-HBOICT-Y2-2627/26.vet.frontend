@@ -9,16 +9,16 @@
   // See docs/submissions/reference-solution-notes.md for the reasoning
   // behind a few of the boundaries drawn here.
   // ------------------------------------------------------------------
-  import SiteHeader from './lib/components/SiteHeader.svelte';
-  import HeroSection from './lib/components/HeroSection.svelte';
-  import TrustStrip from './lib/components/TrustStrip.svelte';
-  import ServicesSection from './lib/components/ServicesSection.svelte';
-  import TeamSection from './lib/components/TeamSection.svelte';
-  import BookingSection from './lib/components/BookingSection.svelte';
-  import PortalTeaserSection from './lib/components/PortalTeaserSection.svelte';
-  import TestimonialsSection from './lib/components/TestimonialsSection.svelte';
-  import PracticalInfoSection from './lib/components/PracticalInfoSection.svelte';
-  import SiteFooter from './lib/components/SiteFooter.svelte';
+  import SiteHeader from './lib/components/organisms/SiteHeader.svelte';
+  import HeroSection from './lib/components/organisms/HeroSection.svelte';
+  import TrustStrip from './lib/components/organisms/TrustStrip.svelte';
+  import ServicesSection from './lib/components/organisms/ServicesSection.svelte';
+  import TeamSection from './lib/components/organisms/TeamSection.svelte';
+  import BookingSection from './lib/components/organisms/BookingSection.svelte';
+  import PortalTeaserSection from './lib/components/organisms/PortalTeaserSection.svelte';
+  import TestimonialsSection from './lib/components/organisms/TestimonialsSection.svelte';
+  import PracticalInfoSection from './lib/components/organisms/PracticalInfoSection.svelte';
+  import SiteFooter from './lib/components/organisms/SiteFooter.svelte';
 
   import {
     navLinks,

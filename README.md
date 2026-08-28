@@ -35,12 +35,22 @@ npm run check    # type-check (svelte-check + tsc)
 
 ```text
 src/
-  App.svelte        # homepage — currently one monolithic file, see Assignment 1
+  App.svelte        # homepage — composed from components, see Assignment 1
   app.css           # Tailwind import + design tokens (colors, fonts)
   lib/
-    components/      # your extracted components go here
+    data.ts          # content: services, vets, opening hours, etc.
+    components/
+      atoms/          # Button, Badge, NavLink, ...
+      molecules/      # ServiceCard, AppointmentTypeSelect, ...
+      organisms/      # SiteHeader, ServicesSection, ...
 docs/
   design.md          # design spec for the site
   assignment-1.md     # Lesson 1 assignment
   screenshots/        # reference renders of the approved design
+  submissions/         # reference solution + student submissions
 ```
+
+> This is the `solution/lesson-1` reference branch — `src/App.svelte` here is already
+> componentized. See `docs/submissions/reference-solution-notes.md` for the reasoning behind
+> the boundaries drawn. The student-facing starting point (one monolithic `App.svelte`) is on
+> `main`.

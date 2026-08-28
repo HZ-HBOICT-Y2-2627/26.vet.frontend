@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Service } from '../data';
-  import Badge from './Badge.svelte';
+  import type { Service } from '../../data';
+  import Badge from '../atoms/Badge.svelte';
 
   interface Props {
     service: Service;

@@ -8,29 +8,33 @@ abstract ideal.
 
 ```text
 App.svelte (page)
-├─ SiteHeader (organism)          — top bar + nav + mobile menu
-│  ├─ NavLink × N (atom)
-│  └─ Button (atom)
-├─ HeroSection (organism)
-│  └─ Button × 2 (atom)
-├─ TrustStrip (organism)
-│  └─ TrustStatItem × 4 (atom)
-├─ ServicesSection (organism)
-│  └─ ServiceCard × 6 (molecule)
-│     └─ Badge (atom)
-├─ TeamSection (organism)
-│  └─ VetCard × 4 (molecule)
-├─ BookingSection (organism)
-│  └─ AppointmentTypeSelect (molecule)
-├─ PortalTeaserSection (organism)
-│  └─ Button (atom)
-├─ TestimonialsSection (organism)
-│  └─ TestimonialCard × 2 (molecule)
-├─ PracticalInfoSection (organism)
-│  └─ OpeningHoursTable (molecule)
-└─ SiteFooter (organism)
-   └─ NavLink × N (atom)
+├─ organisms/SiteHeader          — top bar + nav + mobile menu
+│  ├─ atoms/NavLink × N
+│  └─ atoms/Button
+├─ organisms/HeroSection
+│  └─ atoms/Button × 2
+├─ organisms/TrustStrip
+│  └─ atoms/TrustStatItem × 4
+├─ organisms/ServicesSection
+│  └─ molecules/ServiceCard × 6
+│     └─ atoms/Badge
+├─ organisms/TeamSection
+│  └─ molecules/VetCard × 4
+├─ organisms/BookingSection
+│  └─ molecules/AppointmentTypeSelect
+├─ organisms/PortalTeaserSection
+│  └─ atoms/Button
+├─ organisms/TestimonialsSection
+│  └─ molecules/TestimonialCard × 2
+├─ organisms/PracticalInfoSection
+│  └─ molecules/OpeningHoursTable
+└─ organisms/SiteFooter
+   └─ atoms/NavLink × N
 ```
+
+Folders under `src/lib/components/` mirror the tier (`atoms/`, `molecules/`, `organisms/`) —
+see `design.md`'s sibling discussion in `assignment-1.md` §"Part B" for why we chose folders
+over, say, a naming suffix or no convention at all.
 
 Data (`services`, `vets`, `appointmentTypes`, `openingHours`, `testimonials`, `navLinks`,
 `trustStats`) lives in `src/lib/data.ts` and is imported once, in `App.svelte`, then passed

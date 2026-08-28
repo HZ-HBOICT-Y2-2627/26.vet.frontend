@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from './Button.svelte';
+  import Button from '../atoms/Button.svelte';
 </script>
 
 <section id="portal" class="bg-primary-800 py-16 text-primary-50">

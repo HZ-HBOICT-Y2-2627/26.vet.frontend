@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Vet } from '../data';
+  import type { Vet } from '../../data';
 
   interface Props {
     vet: Vet;

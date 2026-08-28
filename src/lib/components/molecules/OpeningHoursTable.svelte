@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { OpeningHoursRow } from '../data';
+  import type { OpeningHoursRow } from '../../data';
 
   interface Props {
     rows: OpeningHoursRow[];

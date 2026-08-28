@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Vet } from '../data';
-  import VetCard from './VetCard.svelte';
+  import type { Vet } from '../../data';
+  import VetCard from '../molecules/VetCard.svelte';
 
   interface Props {
     vets: Vet[];

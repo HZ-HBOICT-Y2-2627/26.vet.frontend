@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Testimonial } from '../data';
-  import TestimonialCard from './TestimonialCard.svelte';
+  import type { Testimonial } from '../../data';
+  import TestimonialCard from '../molecules/TestimonialCard.svelte';
 
   interface Props {
     testimonials: Testimonial[];
