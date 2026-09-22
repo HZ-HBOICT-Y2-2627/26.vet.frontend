@@ -2,15 +2,6 @@
   import type { Vet } from "../../data";
   import VetCardMini from "../molecules/VetCardMini.svelte";
   import AppointmentSummary from "../molecules/AppointmentSummary.svelte";
-  import { setContext } from "svelte";
-  // import { bookingState } from '../../state/booking-state.svelte';
-
-  interface BookingState {
-    selectedVet: Vet | null;
-  }
-
-  const bookingState: BookingState = $state({ selectedVet: null });
-  setContext("bookingState", bookingState);
 
   interface Props {
     vets: Vet[];
@@ -25,9 +16,9 @@
 
   <div class="mt-10 grid gap-8 md:grid-cols-3">
     <div class="grid gap-6 sm:grid-cols-2 md:col-span-2">
-      {#each vets as vet}
-        <VetCardMini {vet} />
-      {/each}
+      <!-- {#each vets as vet}
+        <VetCardMini />
+      {/each} -->
     </div>
 
     <div
