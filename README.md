@@ -52,6 +52,12 @@ npm run dev      # http://localhost:4000 — first time: see its README for the 
 - [`docs/assignment-1.md`](./docs/assignment-1.md) — the assignment: refactor the monolithic
   `src/App.svelte` homepage into a proper component structure.
 
+## Lesson 3 — Sharing state between components
+
+- [`docs/assignment-3.md`](./docs/assignment-3.md) — the assignment: build the vet selection on
+  the booking page four times (local `$state`, props, a shared `.svelte.ts` module, context) and
+  compare the approaches.
+
 ## Lesson 4 — Loading data from a service
 
 - [`docs/assignment-4.md`](./docs/assignment-4.md) — the assignment: load data from the vets
@@ -90,6 +96,7 @@ services/            # ExpressJS services used by the Svelte app
 docs/
   design.md          # design spec for the site
   assignment-1.md     # Lesson 1 assignment
+  assignment-3.md     # Lesson 3 assignment
   assignment-4.md     # Lesson 4 assignment
   screenshots/        # reference renders of the approved design
   steps/              # step-by-step lesson walkthrough

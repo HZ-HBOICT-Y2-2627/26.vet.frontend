@@ -280,16 +280,6 @@ This part is deliberately a debatable choice. You will be asked whether you'd ke
    - The frontend and the service each have their own `Vet` interface. What could go wrong, and
      how would you notice?
 
-## Grading rubric
-
-| Criterion | Weight |
-| --- | --- |
-| Page `load` works and is typed correctly (`PageServerLoad`, `PageProps`, `error()`) | 25% |
-| Component fetch works, with sensible loading and error states | 20% |
-| Interfaces match the API; no `any`; `npm run check` is clean | 20% |
-| Reflection shows genuine reasoning about the trade-offs, not a description of the code | 25% |
-| Code organization (right env variables, no dead code, components stay presentational) | 10% |
-
 ## Stretch goals (optional)
 
 For students who finish early:
