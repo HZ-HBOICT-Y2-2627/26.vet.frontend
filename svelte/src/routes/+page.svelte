@@ -14,7 +14,6 @@
   import TrustStrip from '$lib/components/organisms/TrustStrip.svelte';
   import ServicesSection from '$lib/components/organisms/ServicesSection.svelte';
   import TeamSection from '$lib/components/organisms/TeamSection.svelte';
-  import BookingSection from '$lib/components/organisms/BookingSection.svelte';
   import PortalTeaserSection from '$lib/components/organisms/PortalTeaserSection.svelte';
   import TestimonialsSection from '$lib/components/organisms/TestimonialsSection.svelte';
   import PracticalInfoSection from '$lib/components/organisms/PracticalInfoSection.svelte';
@@ -24,7 +23,6 @@
     navLinks,
     services,
     vets,
-    appointmentTypes,
     openingHours,
     testimonials,
     trustStats,
@@ -37,7 +35,6 @@
   <TrustStrip stats={trustStats} />
   <ServicesSection {services} />
   <TeamSection {vets} />
-  <BookingSection {appointmentTypes} />
   <PortalTeaserSection />
   <TestimonialsSection {testimonials} />
   <PracticalInfoSection {openingHours} />

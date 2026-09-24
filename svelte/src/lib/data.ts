@@ -15,6 +15,7 @@ export interface Service {
 }
 
 export interface Vet {
+  id: number;
   name: string;
   role: string;
   bio: string;
@@ -22,7 +23,8 @@ export interface Vet {
 }
 
 export interface AppointmentType {
-  id: string;
+  id: number;
+  slug: string; // e.g. "vaccination"
   label: string;
   durationMinutes: number;
 }
@@ -93,24 +95,28 @@ export const services: Service[] = [
 
 export const vets: Vet[] = [
   {
+    id: 1,
     name: 'Dr. Alex van Dijk',
     role: 'Practice owner & lead veterinarian',
     bio: '18 years of experience with companion animals. Owner of the practice for the past 9 years.',
     initials: 'AvD',
   },
   {
+    id: 2,
     name: 'Dr. Robin Smits',
     role: 'Veterinarian',
     bio: 'Focuses on general medicine and surgery, with a soft spot for senior pets.',
     initials: 'RS',
   },
   {
+    id: 3,
     name: 'Dr. Farah El Amrani',
     role: 'Veterinarian',
     bio: 'Specialises in dermatology and allergy-related conditions.',
     initials: 'FE',
   },
   {
+    id: 4,
     name: 'Dr. Michael de Groot',
     role: 'Exotic animal specialist',
     bio: 'Sees exotic pets — rabbits, birds and reptiles — every Tuesday and Thursday.',
@@ -118,13 +124,6 @@ export const vets: Vet[] = [
   },
 ];
 
-export const appointmentTypes: AppointmentType[] = [
-  { id: 'vaccination', label: 'Vaccination', durationMinutes: 15 },
-  { id: 'checkup', label: 'General check-up', durationMinutes: 30 },
-  { id: 'new-patient', label: 'New puppy / kitten consult', durationMinutes: 45 },
-  { id: 'skin', label: 'Skin or allergy issue', durationMinutes: 30 },
-  { id: 'follow-up', label: 'Follow-up visit', durationMinutes: 15 },
-];
 
 export const openingHours: OpeningHoursRow[] = [
   { day: 'Monday – Friday', hours: '08:30 – 18:00' },

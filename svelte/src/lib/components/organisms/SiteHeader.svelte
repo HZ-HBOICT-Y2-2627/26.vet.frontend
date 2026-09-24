@@ -23,7 +23,7 @@
 
 <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-    <a href="#home" class="flex items-center gap-2 text-lg font-bold text-primary-700">
+    <a href="/" class="flex items-center gap-2 text-lg font-bold text-primary-700">
       <span class="text-2xl">🐾</span>
       Kliniek Van Dijk
     </a>
@@ -35,7 +35,7 @@
     </nav>
 
     <div class="hidden md:inline-block">
-      <Button href="#book" size="sm" label="Book appointment" />
+      <Button href="/book-appointment" size="sm" label="Book appointment" />
     </div>
 
     <button

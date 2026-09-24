@@ -1,13 +1,19 @@
 <script lang="ts">
-  import type { AppointmentType } from '../../data';
+  import type { Vet, AppointmentType } from '../../data';
   import { emergencyPhone } from '../../data';
   import AppointmentTypeSelect from '../molecules/AppointmentTypeSelect.svelte';
+  import { setContext } from 'svelte';
 
-  interface Props {
-    appointmentTypes: AppointmentType[];
+  interface BookingState {
+    selectedVet: Vet | null;
+    selectedAppointmentType: AppointmentType | null;
   }
 
-  let { appointmentTypes }: Props = $props();
+  // AppointmentTypeSelect reads 'bookingState' from context, so the homepage
+  // needs to provide one too.
+  const bookingState: BookingState = $state({ selectedVet: null, selectedAppointmentType: null });
+  setContext('bookingState', bookingState);
+
 </script>
 
 <section id="book" class="mx-auto max-w-6xl px-4 py-16">
@@ -36,7 +42,7 @@
     </div>
 
     <div class="rounded-2xl border border-slate-200 p-6 shadow-sm">
-      <AppointmentTypeSelect types={appointmentTypes} />
+      <AppointmentTypeSelect />
 
       <label for="appointment-date" class="mt-4 block text-sm font-semibold text-slate-700">
         Preferred date
