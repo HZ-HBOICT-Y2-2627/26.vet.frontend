@@ -27,6 +27,7 @@ To run the frontend:
 
 ```bash
 cd svelte
+cp .env.example .env   # first time only: the URLs of the services
 npm install
 npm run dev      # start the dev server
 npm run build    # production build
@@ -34,7 +35,8 @@ npm run check    # type-check (svelte-check + tsc)
 ```
 
 Each service in `services/` is started from its own folder in the same way (`npm install`, then
-the scripts in its `package.json`).
+the scripts in its `package.json`). The booking page loads its data from
+`services/vets_service`, so start that service first (see its README).
 
 ## Lesson 1 — Components & thinking in components
 
