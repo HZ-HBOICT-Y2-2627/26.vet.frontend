@@ -21,7 +21,7 @@ one real (if fictional) product rather than a series of disconnected exercises.
 The repository holds two kinds of apps, each in its own folder with its own `package.json`:
 
 - `svelte/` — the SvelteKit frontend.
-- `service/` — the ExpressJS services the frontend talks to (one subfolder per service).
+- `services/` — the ExpressJS services the frontend talks to (one subfolder per service).
 
 To run the frontend:
 
@@ -33,7 +33,7 @@ npm run build    # production build
 npm run check    # type-check (svelte-check + tsc)
 ```
 
-Each service in `service/` is started from its own folder in the same way (`npm install`, then
+Each service in `services/` is started from its own folder in the same way (`npm install`, then
 the scripts in its `package.json`).
 
 ## Lesson 1 — Components & thinking in components
@@ -66,7 +66,7 @@ svelte/              # the SvelteKit app — run npm commands from here
         atoms/          # Button, Badge, NavLink, ...
         molecules/      # ServiceCard, AppointmentTypeSelect, ...
         organisms/      # SiteHeader, ServicesSection, ...
-service/             # ExpressJS services used by the Svelte app
+services/            # ExpressJS services used by the Svelte app
   README.md
 docs/
   design.md          # design spec for the site
