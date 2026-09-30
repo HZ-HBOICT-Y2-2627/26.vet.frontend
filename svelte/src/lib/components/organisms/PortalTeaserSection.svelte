@@ -10,7 +10,7 @@
       technical jargon.
     </p>
     <div class="mt-6">
-      <Button href="/portal" variant="inverse" label="Log in to the client portal" />
+      <Button href="/login" variant="inverse" label="Log in to the client portal" />
     </div>
   </div>
 </section>

@@ -12,8 +12,19 @@
 
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-6xl px-4">
-    <h1 class="text-3xl font-bold text-primary-900">Client portal</h1>
-    <p class="mt-2 text-slate-600">You are logged in as <span class="font-semibold">{email}</span>.</p>
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-bold text-primary-900">Client portal</h1>
+        <p class="mt-2 text-slate-600">You are logged in as <span class="font-semibold">{email}</span>.</p>
+      </div>
+
+      <!-- A form, not a link: logging out changes something, so it's a POST. -->
+      <form method="POST" action="/logout">
+        <button type="submit" class="rounded-full border border-primary-600 px-6 py-3 font-semibold text-primary-700 hover:bg-primary-100">
+          Log out
+        </button>
+      </form>
+    </div>
 
     <h2 class="mt-10 text-2xl font-bold text-primary-900">My pets</h2>
 

@@ -29,6 +29,18 @@ export interface AppointmentType {
   durationMinutes: number;
 }
 
+// What POST /auth/login and GET /auth/me return (through the API gateway).
+export interface User {
+  id: number;
+  email: string;
+  role: 'USER' | 'ADMIN';
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
+}
+
 // Same shape as GET /my/pets on the API gateway returns.
 export interface Pet {
   id: number;

@@ -84,7 +84,10 @@ Dummy clients to log in with (password `supersecret1`): `noor@example.com`, `sam
 - [`docs/assignment-5.md`](./docs/assignment-5.md) — the assignment: add a login (form action +
   httpOnly cookie), and load the logged-in user's pets in the client portal through the API
   gateway.
-- The portal page (`/portal`) is the starting point: it still shows dummy data from `data.ts`.
+- [`docs/slides.md`](./docs/slides.md) — slides for the 90-minute lesson: concepts, then Parts A–D
+  step by step.
+- All pages are ready (`/login`, `/portal`, `/logout`); students fill in the `TODO`s in the
+  server files. Until then, the portal shows dummy data from `data.ts`.
 
 ## Project structure
 
