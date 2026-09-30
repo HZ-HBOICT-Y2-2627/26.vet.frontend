@@ -38,3 +38,27 @@ model AppointmentType {
 
   @@map("appointment_types")
 }
+
+// A client of the practice. The email is the link to the login in
+// auth-service: a logged-in user sees the owner with the same email.
+model Owner {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+  phone String
+  pets  Pet[]
+
+  @@map("owners")
+}
+
+model Pet {
+  id        Int      @id @default(autoincrement())
+  name      String
+  species   String // e.g. "Cat"
+  breed     String
+  birthDate DateTime @map("birth_date")
+  ownerId   Int      @map("owner_id")
+  owner     Owner    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@map("pets")
+}

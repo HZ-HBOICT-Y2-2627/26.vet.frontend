@@ -11,4 +11,6 @@
 export type * from './models/Treatment'
 export type * from './models/Vet'
 export type * from './models/AppointmentType'
+export type * from './models/Owner'
+export type * from './models/Pet'
 export type * from './commonInputTypes'

@@ -14,6 +14,20 @@ export interface Vet {
   initials: string;
 }
 
+export interface Pet {
+  name: string;
+  species: string;
+  breed: string;
+  birthDate: string; // "YYYY-MM-DD"
+}
+
+export interface Owner {
+  name: string;
+  email: string; // the same email the owner uses to log in
+  phone: string;
+  pets: Pet[];
+}
+
 export interface AppointmentType {
   id: string;
   label: string;
@@ -92,4 +106,35 @@ export const appointmentTypes: AppointmentType[] = [
   { id: 'new-patient', label: 'New puppy / kitten consult', durationMinutes: 45 },
   { id: 'skin', label: 'Skin or allergy issue', durationMinutes: 30 },
   { id: 'follow-up', label: 'Follow-up visit', durationMinutes: 15 },
+];
+
+// Dummy clients for the client portal. Log in with one of these emails to see
+// that owner's pets.
+export const owners: Owner[] = [
+  {
+    name: 'Noor de Boer',
+    email: 'noor@example.com',
+    phone: '06 12345678',
+    pets: [
+      { name: 'Roos', species: 'Cat', breed: 'British Shorthair', birthDate: '2012-04-18' },
+    ],
+  },
+  {
+    name: 'Sam Jansen',
+    email: 'sam@example.com',
+    phone: '06 23456789',
+    pets: [
+      { name: 'Max', species: 'Dog', breed: 'Labrador Retriever', birthDate: '2019-09-02' },
+      { name: 'Pip', species: 'Rabbit', breed: 'Dutch', birthDate: '2023-03-11' },
+    ],
+  },
+  {
+    name: 'Lisa Bakker',
+    email: 'lisa@example.com',
+    phone: '06 34567890',
+    pets: [
+      { name: 'Olaf', species: 'Guinea pig', breed: 'Abyssinian', birthDate: '2024-06-25' },
+      { name: 'Saar', species: 'Guinea pig', breed: 'Teddy', birthDate: '2024-06-25' },
+    ],
+  },
 ];
