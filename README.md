@@ -36,14 +36,27 @@ npm run check    # type-check (svelte-check + tsc)
 ```
 
 Each service in `services/` is started from its own folder in the same way (`npm install`, then
-the scripts in its `package.json`). The booking page loads its data from
-`services/vets_service`, so start that service first:
+the scripts in its `package.json`). The frontend only talks to the API gateway, which forwards
+requests to the other services. Start all three first, each in its own terminal:
 
 ```bash
 cd services/vets_service
 npm install
 npm run dev      # http://localhost:4000 — first time: see its README for the database setup
+
+cd services/auth-service
+cp .env.example .env
+npm install
+npm run dev      # http://localhost:4001 — first time: run npm run prisma:migrate
+
+cd services/api-gateway-service
+cp .env.example .env
+npm install
+npm run dev      # http://localhost:3000 — the entry point for the frontend
 ```
+
+The gateway keeps `/auth/register` and `/auth/login` public. `/vets`, `/treatments` and
+`/appointment-types` require a token: `Authorization: Bearer <token>`.
 
 ## Lesson 1 — Components & thinking in components
 

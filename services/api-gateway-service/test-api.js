@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+/**
+ * API GATEWAY TEST SUITE
+ *
+ * Run the gateway first: npm run dev
+ * Make sure vets_service (port 4000) and auth-service (port 4001) are also running.
+ * Then run: node test-api.js
+ */
+
+const http = require('http');
+
+const PORT = 3000;
+
+async function request(method, path, { body, token } = {}) {
+  return new Promise((resolve, reject) => {
+    const payload = body ? JSON.stringify(body) : null;
+    const headers = {
+      ...(payload ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) } : {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
+    const options = { hostname: 'localhost', port: PORT, method, path, headers };
+
+    const req = http.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        try {
+          resolve({ status: res.statusCode, data: data ? JSON.parse(data) : null });
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+
+    req.on('error', reject);
+    if (payload) req.write(payload);
+    req.end();
+  });
+}
+
+const email = `test-suite-${Date.now()}@example.com`;
+const password = 'supersecret1';
+let token;
+
+const tests = [
+  { name: 'Health check', fn: () => request('GET', '/health') },
+
+  { name: 'GET /vets without token -> rejected', expect: 401,
+    fn: () => request('GET', '/vets') },
+
+  { name: 'GET /vets with an invalid token -> rejected', expect: 401,
+    fn: () => request('GET', '/vets', { token: 'not-a-real-token' }) },
+
+  { name: 'POST /auth/register (public) -> issues a token', expect: 201,
+    fn: async () => {
+      const res = await request('POST', '/auth/register', { body: { email, password } });
+      token = res.data?.token;
+      return res;
+    } },
+
+  { name: 'POST /auth/login (public) with the same credentials', expect: 200,
+    fn: () => request('POST', '/auth/login', { body: { email, password } }) },
+
+  { name: 'GET /auth/me with token', expect: 200,
+    fn: () => request('GET', '/auth/me', { token }) },
+
+  { name: 'GET /vets with token', expect: 200,
+    fn: () => request('GET', '/vets', { token }) },
+
+  { name: 'GET /treatments with token', expect: 200,
+    fn: () => request('GET', '/treatments', { token }) },
+
+  { name: 'GET /appointment-types with token', expect: 200,
+    fn: () => request('GET', '/appointment-types', { token }) },
+];
+
+async function runTests() {
+  console.log('\nAPI GATEWAY TEST SUITE\n');
+  console.log('Make sure the gateway, vets_service, and auth-service are all running\n');
+
+  let failures = 0;
+
+  for (const test of tests) {
+    try {
+      console.log(`Testing: ${test.name}`);
+      const result = await test.fn();
+      const ok = test.expect ? result.status === test.expect : result.status >= 200 && result.status < 300;
+      if (!ok) failures += 1;
+      console.log(`  ${ok ? 'OK' : 'FAIL'} (${result.status})\n`);
+    } catch (error) {
+      failures += 1;
+      console.log(`  Connection Error: ${error.message}`);
+      console.log(`  Make sure the gateway is running on port ${PORT}\n`);
+      break;
+    }
+  }
+
+  console.log(failures === 0 ? 'All tests passed!\n' : `${failures} test(s) failed.\n`);
+  process.exitCode = failures === 0 ? 0 : 1;
+}
+
+runTests();

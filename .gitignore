@@ -35,3 +35,6 @@ test-results
 *.njsproj
 *.sln
 *.sw?
+
+# auth-service database (created by prisma migrate)
+services/auth-service/data/*.sqlite
