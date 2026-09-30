@@ -79,6 +79,13 @@ Dummy clients to log in with (password `supersecret1`): `noor@example.com`, `sam
 - The booking page (`/book-appointment`) is the worked example: the vets are loaded by the
   page, the appointment types by `AppointmentTypeSelect` itself.
 
+## Lesson 5 — Logging in to the client portal
+
+- [`docs/assignment-5.md`](./docs/assignment-5.md) — the assignment: add a login (form action +
+  httpOnly cookie), and load the logged-in user's pets in the client portal through the API
+  gateway.
+- The portal page (`/portal`) is the starting point: it still shows dummy data from `data.ts`.
+
 ## Project structure
 
 ```text

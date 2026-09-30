@@ -29,6 +29,16 @@ export interface AppointmentType {
   durationMinutes: number;
 }
 
+// Same shape as GET /my/pets on the API gateway returns.
+export interface Pet {
+  id: number;
+  name: string;
+  species: string;
+  breed: string;
+  birthDate: string; // ISO date, e.g. "2012-04-18T00:00:00.000Z"
+  ownerId: number;
+}
+
 export interface OpeningHoursRow {
   day: string;
   hours: string;
@@ -152,3 +162,18 @@ export const trustStats: TrustStat[] = [
 ];
 
 export const emergencyPhone = { display: '010 - 123 4567', href: 'tel:+31101234567' };
+
+// Dummy data for the client portal, until it's connected to the backend
+// (Assignment 5). Noor's pets, exactly as GET /my/pets would return them.
+export const portalEmail = 'noor@example.com';
+
+export const pets: Pet[] = [
+  {
+    id: 1,
+    name: 'Roos',
+    species: 'Cat',
+    breed: 'British Shorthair',
+    birthDate: '2012-04-18T00:00:00.000Z',
+    ownerId: 1,
+  },
+];
