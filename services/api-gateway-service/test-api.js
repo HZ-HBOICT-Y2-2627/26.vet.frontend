@@ -46,11 +46,20 @@ let token;
 const tests = [
   { name: 'Health check', fn: () => request('GET', '/health') },
 
-  { name: 'GET /vets without token -> rejected', expect: 401,
+  { name: 'GET /vets (public) without token', expect: 200,
     fn: () => request('GET', '/vets') },
 
-  { name: 'GET /vets with an invalid token -> rejected', expect: 401,
-    fn: () => request('GET', '/vets', { token: 'not-a-real-token' }) },
+  { name: 'GET /treatments (public) without token', expect: 200,
+    fn: () => request('GET', '/treatments') },
+
+  { name: 'GET /appointment-types (public) without token', expect: 200,
+    fn: () => request('GET', '/appointment-types') },
+
+  { name: 'POST /vets without token -> rejected', expect: 401,
+    fn: () => request('POST', '/vets', { body: {} }) },
+
+  { name: 'POST /vets with an invalid token -> rejected', expect: 401,
+    fn: () => request('POST', '/vets', { body: {}, token: 'not-a-real-token' }) },
 
   { name: 'POST /auth/register (public) -> issues a token', expect: 201,
     fn: async () => {
@@ -65,14 +74,8 @@ const tests = [
   { name: 'GET /auth/me with token', expect: 200,
     fn: () => request('GET', '/auth/me', { token }) },
 
-  { name: 'GET /vets with token', expect: 200,
-    fn: () => request('GET', '/vets', { token }) },
-
-  { name: 'GET /treatments with token', expect: 200,
-    fn: () => request('GET', '/treatments', { token }) },
-
-  { name: 'GET /appointment-types with token', expect: 200,
-    fn: () => request('GET', '/appointment-types', { token }) },
+  { name: 'POST /vets with token -> reaches vets_service (400: empty body fails validation)', expect: 400,
+    fn: () => request('POST', '/vets', { body: {}, token }) },
 ];
 
 async function runTests() {

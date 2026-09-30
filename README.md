@@ -55,8 +55,9 @@ npm install
 npm run dev      # http://localhost:3000 — the entry point for the frontend
 ```
 
-The gateway keeps `/auth/register` and `/auth/login` public. `/vets`, `/treatments` and
-`/appointment-types` require a token: `Authorization: Bearer <token>`.
+The gateway keeps `/auth/register` and `/auth/login` public. Reading `/vets`, `/treatments`
+and `/appointment-types` (GET) is public too; changing them (POST, PUT, DELETE) requires a
+token: `Authorization: Bearer <token>`.
 
 ## Lesson 1 — Components & thinking in components
 

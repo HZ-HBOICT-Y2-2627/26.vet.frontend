@@ -53,9 +53,9 @@ docker run -p 3000:3000 --env-file .env \
 | Path | Proxied to | Auth required |
 | --- | --- | --- |
 | `/auth` | `auth-service` (`AUTH_SERVICE_URL`) | No — must stay reachable so anyone can register/log in |
-| `/vets` | `vets_service` (`VETS_SERVICE_URL`) | Yes |
-| `/treatments` | `vets_service` (`VETS_SERVICE_URL`) | Yes |
-| `/appointment-types` | `vets_service` (`VETS_SERVICE_URL`) | Yes |
+| `/vets` | `vets_service` (`VETS_SERVICE_URL`) | GET: no — POST/PUT/DELETE: yes |
+| `/treatments` | `vets_service` (`VETS_SERVICE_URL`) | GET: no — POST/PUT/DELETE: yes |
+| `/appointment-types` | `vets_service` (`VETS_SERVICE_URL`) | GET: no — POST/PUT/DELETE: yes |
 | `/health` | handled locally, reports gateway status and configured upstreams | No |
 
 Requests to any other path receive a `404`.
@@ -72,15 +72,15 @@ See `src/routes/vets.ts` / `src/routes/auth.ts` for the proxy definitions and `s
 
 `auth-service` issues JWTs (`POST /auth/register`, `POST /auth/login`, `GET /auth/me`). The gateway proxies `/auth` through without checking anything, so anyone can register and log in.
 
-All `vets_service` routes are protected by `src/middleware/authenticate.ts`. A request must send the token it got from register or login:
+Reading `vets_service` data (`GET`) is public, so the website can show vets and appointment types to every visitor. Changing data (`POST`, `PUT`, `DELETE`) is protected by `src/middleware/authenticate.ts` (see `src/server.ts`). Such a request must send the token it got from register or login:
 
 ```http
 Authorization: Bearer <token>
 ```
 
-Without a valid token the gateway answers `401` and the request never reaches `vets_service`.
+Without a valid token the gateway answers `401` to a write request and the request never reaches `vets_service`.
 
-The gateway verifies the token **locally**: it holds the same `JWT_SECRET` as `auth-service`, so it can check the signature itself instead of calling `auth-service` on every request — no extra network call, and `/vets` keeps working even while `auth-service` is down. The flip side is that both services must use the same `JWT_SECRET`.
+The gateway verifies the token **locally**: it holds the same `JWT_SECRET` as `auth-service`, so it can check the signature itself instead of calling `auth-service` on every request — no extra network call, and writes keep working even while `auth-service` is down. The flip side is that both services must use the same `JWT_SECRET`.
 
 `cors()` is mounted before `authenticate`, so browser preflight (`OPTIONS`) requests are answered without a token.
 

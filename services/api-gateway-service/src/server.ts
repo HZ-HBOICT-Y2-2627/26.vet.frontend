@@ -33,8 +33,11 @@ app.get('/health', (_req, res) => {
 // Public: anyone must be able to register and log in.
 app.use(authProxy);
 
-// Protected: only requests with a valid token reach vets_service.
-app.use(VETS_PATHS, authenticate);
+// Reading is public; writing (POST, PUT, DELETE) needs a valid token.
+app.use(VETS_PATHS, (req, res, next) => {
+  if (req.method === 'GET') return next();
+  return authenticate(req, res, next);
+});
 app.use(vetsProxy);
 
 app.use((_req, res) => {
@@ -49,5 +52,5 @@ app.listen(PORT, () => {
   console.log(`API gateway running at http://localhost:${PORT}`);
   console.log(`Environment: ${NODE_ENV}`);
   AUTH_PATHS.forEach((path) => console.log(`→ ${path.padEnd(18)} → ${authUrl} (public)`));
-  VETS_PATHS.forEach((path) => console.log(`→ ${path.padEnd(18)} → ${vetsServiceUrl} (requires token)`));
+  VETS_PATHS.forEach((path) => console.log(`→ ${path.padEnd(18)} → ${vetsServiceUrl} (GET public, writes require token)`));
 });
