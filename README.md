@@ -47,7 +47,7 @@ npm run dev      # http://localhost:4000 — first time: see its README for the 
 cd services/auth-service
 cp .env.example .env
 npm install
-npm run dev      # http://localhost:4001 — first time: run npm run prisma:migrate
+npm run dev      # http://localhost:4001 — first time: npm run prisma:migrate && npm run prisma:seed
 
 cd services/api-gateway-service
 cp .env.example .env
@@ -57,7 +57,12 @@ npm run dev      # http://localhost:3000 — the entry point for the frontend
 
 The gateway keeps `/auth/register` and `/auth/login` public. Reading `/vets`, `/treatments`
 and `/appointment-types` (GET) is public too; changing them (POST, PUT, DELETE) requires a
-token: `Authorization: Bearer <token>`.
+token: `Authorization: Bearer <token>`. `/my/pets` returns the pets of the logged-in user and
+always requires a token.
+
+Dummy clients to log in with (password `supersecret1`): `noor@example.com`, `sam@example.com`,
+`lisa@example.com`. The login email is what links a user to an owner and their pets in
+`vets_service`.
 
 ## Lesson 1 — Components & thinking in components
 

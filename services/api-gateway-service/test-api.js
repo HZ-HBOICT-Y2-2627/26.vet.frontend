@@ -12,12 +12,13 @@ const http = require('http');
 
 const PORT = 3000;
 
-async function request(method, path, { body, token } = {}) {
+async function request(method, path, { body, token, headers: extraHeaders } = {}) {
   return new Promise((resolve, reject) => {
     const payload = body ? JSON.stringify(body) : null;
     const headers = {
       ...(payload ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) } : {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...extraHeaders,
     };
     const options = { hostname: 'localhost', port: PORT, method, path, headers };
 
@@ -42,6 +43,7 @@ async function request(method, path, { body, token } = {}) {
 const email = `test-suite-${Date.now()}@example.com`;
 const password = 'supersecret1';
 let token;
+let noorToken; // seeded in auth-service: npm run prisma:seed
 
 const tests = [
   { name: 'Health check', fn: () => request('GET', '/health') },
@@ -76,6 +78,34 @@ const tests = [
 
   { name: 'POST /vets with token -> reaches vets_service (400: empty body fails validation)', expect: 400,
     fn: () => request('POST', '/vets', { body: {}, token }) },
+
+  { name: 'GET /my/pets without token -> rejected', expect: 401,
+    fn: () => request('GET', '/my/pets') },
+
+  { name: 'GET /my/pets as a new user -> no pets', expect: 200,
+    fn: async () => {
+      const res = await request('GET', '/my/pets', { token });
+      return { ...res, status: res.data?.length === 0 ? res.status : 'unexpected pets' };
+    } },
+
+  { name: 'POST /auth/login as seeded owner noor@example.com', expect: 200,
+    fn: async () => {
+      const res = await request('POST', '/auth/login', { body: { email: 'noor@example.com', password: 'supersecret1' } });
+      noorToken = res.data?.token;
+      return res;
+    } },
+
+  { name: 'GET /my/pets as Noor -> Roos', expect: 200,
+    fn: async () => {
+      const res = await request('GET', '/my/pets', { token: noorToken });
+      return { ...res, status: res.data?.[0]?.name === 'Roos' ? res.status : 'Roos not found' };
+    } },
+
+  { name: 'GET /my/pets with a fake X-User-Email header -> ignored', expect: 200,
+    fn: async () => {
+      const res = await request('GET', '/my/pets', { token, headers: { 'X-User-Email': 'noor@example.com' } });
+      return { ...res, status: res.data?.length === 0 ? res.status : 'header was trusted' };
+    } },
 ];
 
 async function runTests() {

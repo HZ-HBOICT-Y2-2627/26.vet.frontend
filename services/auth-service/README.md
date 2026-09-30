@@ -19,6 +19,10 @@ npm install
 # Create the database and run migrations
 npm run prisma:migrate
 
+# Add login accounts for the dummy owners in vets_service
+# (noor@, sam@ and lisa@example.com, password: supersecret1)
+npm run prisma:seed
+
 npm run dev
 ```
 

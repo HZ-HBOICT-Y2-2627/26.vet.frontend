@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { vetsProxy, VETS_PATHS } from './routes/vets';
+import { vetsProxy, VETS_PATHS, MY_PATHS } from './routes/vets';
 import { authProxy, AUTH_PATHS } from './routes/auth';
 import { authenticate } from './middleware/authenticate';
 import { errorHandler } from './middleware/errorHandling';
@@ -38,6 +38,8 @@ app.use(VETS_PATHS, (req, res, next) => {
   if (req.method === 'GET') return next();
   return authenticate(req, res, next);
 });
+// Personal data: every request needs a valid token, also GET.
+app.use(MY_PATHS, authenticate);
 app.use(vetsProxy);
 
 app.use((_req, res) => {
@@ -53,4 +55,5 @@ app.listen(PORT, () => {
   console.log(`Environment: ${NODE_ENV}`);
   AUTH_PATHS.forEach((path) => console.log(`→ ${path.padEnd(18)} → ${authUrl} (public)`));
   VETS_PATHS.forEach((path) => console.log(`→ ${path.padEnd(18)} → ${vetsServiceUrl} (GET public, writes require token)`));
+  MY_PATHS.forEach((path) => console.log(`→ ${path.padEnd(18)} → ${vetsServiceUrl} (requires token)`));
 });

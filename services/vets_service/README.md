@@ -240,6 +240,14 @@ Base URL: `http://localhost:4000`
 { "slug": "vaccination", "label": "Vaccination", "durationMinutes": 15 }
 ```
 
+### My pets
+
+| Method | Path | Description |
+| --- | --- | --- |
+| GET | `/my/pets` | Pets of the logged-in owner |
+
+This service doesn't check tokens. The API gateway verifies the token and passes the logged-in user's email in the `X-User-Email` header; the pets of the owner with that email are returned (an empty list if there is no such owner). Call it through the gateway, not directly.
+
 ### Health
 
 ```
@@ -334,6 +342,7 @@ The seed script reads `data.ts` (the same content the Svelte frontend uses) and 
 - **6 Treatments**: Vaccinations, General check-up, New puppy / kitten consult, Skin & allergy consult, Lab diagnostics, Exotic animal consult
 - **4 Vets**: Dr. Alex van Dijk, Dr. Robin Smits, Dr. Farah El Amrani, Dr. Michael de Groot
 - **5 Appointment types**: Vaccination, General check-up, New puppy / kitten consult, Skin or allergy issue, Follow-up visit
+- **3 Owners with 5 pets**: Noor de Boer (Roos), Sam Jansen (Max, Pip), Lisa Bakker (Olaf, Saar). Their emails match the login accounts seeded in `auth-service`.
 
 ---
 

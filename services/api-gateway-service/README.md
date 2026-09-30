@@ -56,6 +56,7 @@ docker run -p 3000:3000 --env-file .env \
 | `/vets` | `vets_service` (`VETS_SERVICE_URL`) | GET: no — POST/PUT/DELETE: yes |
 | `/treatments` | `vets_service` (`VETS_SERVICE_URL`) | GET: no — POST/PUT/DELETE: yes |
 | `/appointment-types` | `vets_service` (`VETS_SERVICE_URL`) | GET: no — POST/PUT/DELETE: yes |
+| `/my` | `vets_service` (`VETS_SERVICE_URL`) | Yes, also GET — personal data of the logged-in user |
 | `/health` | handled locally, reports gateway status and configured upstreams | No |
 
 Requests to any other path receive a `404`.
@@ -81,6 +82,8 @@ Authorization: Bearer <token>
 Without a valid token the gateway answers `401` to a write request and the request never reaches `vets_service`.
 
 The gateway verifies the token **locally**: it holds the same `JWT_SECRET` as `auth-service`, so it can check the signature itself instead of calling `auth-service` on every request — no extra network call, and writes keep working even while `auth-service` is down. The flip side is that both services must use the same `JWT_SECRET`.
+
+`/my` (e.g. `/my/pets`) always needs a token. After verifying it, `authenticate` sets the `X-User-Email` header from the token, so `vets_service` knows whose data to return. It overwrites any `X-User-Email` the client sent, so nobody can pretend to be someone else.
 
 `cors()` is mounted before `authenticate`, so browser preflight (`OPTIONS`) requests are answered without a token.
 

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { treatmentsRouter } from './routes/treatments';
 import { vetsRouter } from './routes/vets';
 import { appointmentTypesRouter } from './routes/appointmentTypes';
+import { myRouter } from './routes/my';
 import { errorHandler } from './middleware/errorHandling';
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/health', (_req, res) => {
 app.use('/treatments', treatmentsRouter);
 app.use('/vets', vetsRouter);
 app.use('/appointment-types', appointmentTypesRouter);
+app.use('/my', myRouter);
 
 app.use(errorHandler);
 
