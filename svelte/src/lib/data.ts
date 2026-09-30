@@ -174,18 +174,3 @@ export const trustStats: TrustStat[] = [
 ];
 
 export const emergencyPhone = { display: '010 - 123 4567', href: 'tel:+31101234567' };
-
-// Dummy data for the client portal, until it's connected to the backend
-// (Assignment 5). Noor's pets, exactly as GET /my/pets would return them.
-export const portalEmail = 'noor@example.com';
-
-export const pets: Pet[] = [
-  {
-    id: 1,
-    name: 'Roos',
-    species: 'Cat',
-    breed: 'British Shorthair',
-    birthDate: '2012-04-18T00:00:00.000Z',
-    ownerId: 1,
-  },
-];

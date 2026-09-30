@@ -4,26 +4,36 @@ import type { LoginResponse } from '$lib/data';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-  // Runs on the server when the login form is submitted (method="POST").
   default: async ({ request, fetch, cookies }) => {
     const form = await request.formData();
     const email = String(form.get('email') ?? '');
     const password = String(form.get('password') ?? '');
 
-    // TODO (Part B, step 1): when email or password is empty, return
-    // fail(400, { email, error: '...' }) with a message in plain language.
+    if (!email || !password) {
+      return fail(400, { email, error: 'Please fill in your email address and password.' });
+    }
 
-    // TODO (Part B, step 2): send email and password to the gateway:
-    // POST `${VET_SERVICE_API_URL}/auth/login` with a JSON body.
+    const response = await fetch(`${VET_SERVICE_API_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-    // TODO (Part B, step 3): when the response is not ok, return fail(...)
-    // with a message. A status of 500 or higher means the service is down;
-    // anything else means the email or password is wrong.
+    if (response.status >= 500) {
+      return fail(503, { email, error: 'Logging in is not possible right now. Please try again later.' });
+    }
+    if (!response.ok) {
+      return fail(401, { email, error: 'Check your email address and password and try again.' });
+    }
 
-    // TODO (Part B, step 4): read the LoginResponse from the response, store
-    // the token in an httpOnly cookie named 'token', and redirect to /portal.
+    const result: LoginResponse = await response.json();
+    cookies.set('token', result.token, {
+      path: '/',
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7, // 7 days, the same as the token itself
+    });
 
-    // Remove this line when you're done.
-    return fail(501, { email, error: 'Logging in is not built yet. That is Part B!' });
+    redirect(303, '/portal');
   },
 };
