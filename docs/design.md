@@ -7,7 +7,7 @@ repository.
 
 It describes *what* we're building and *why*. It intentionally does not prescribe a component
 structure — figuring out how to break this design into components is the subject of
-[Assignment 1](./assignment-1.md).
+[Assignment 1](./assignments/assignment-1.md).
 
 ## 1. Scope
 
@@ -68,7 +68,7 @@ thrown away.
 
 ## 4. Design tokens
 
-Defined in [`src/app.css`](../src/app.css) as Tailwind v4 `@theme` tokens, used via utility
+Defined in [`src/app.css`](../svelte/src/app.css) as Tailwind v4 `@theme` tokens, used via utility
 classes like `bg-primary-600` or `text-accent-500`.
 
 | Token | Value | Use |

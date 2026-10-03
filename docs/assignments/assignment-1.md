@@ -1,13 +1,13 @@
 # Assignment 1 — Thinking in components
 
-**Case:** Kliniek Van Dijk (see [`design.md`](./design.md))
+**Case:** Kliniek Van Dijk (see [`design.md`](../design.md))
 **Stack:** Svelte 5 + TypeScript + Tailwind CSS
 **Format:** starts in the lesson, finishes as homework
 
 ## Context
 
-The practice approved the design in [`design.md`](./design.md). Someone already built it — to
-hit a deadline, they put the entire homepage in a single file: [`src/App.svelte`](../src/App.svelte).
+The practice approved the design in [`design.md`](../design.md). Someone already built it — to
+hit a deadline, they put the entire homepage in a single file: [`src/App.svelte`](../../src/App.svelte).
 It works, it matches the design pixel-for-pixel, and `npm run build` is clean. But it's one
 457-line file with no reuse, which is a problem the moment anyone needs to:
 
@@ -38,12 +38,12 @@ npm install
 npm run dev
 ```
 
-Open the running site and open [`src/App.svelte`](../src/App.svelte) side by side. Also read
-[`design.md`](./design.md) — you'll need the reasoning behind a few decisions (e.g. why the
+Open the running site and open [`src/App.svelte`](../../src/App.svelte) side by side. Also read
+[`design.md`](../design.md) — you'll need the reasoning behind a few decisions (e.g. why the
 duration badge exists) to judge what a component's *responsibility* should be, not just where
 the `<div>` tags happen to fall.
 
-New to Svelte? Read [`svelte-component-basics.md`](./svelte-component-basics.md) first — a
+New to Svelte? Read [`svelte-component-basics.md`](../cheatsheet/svelte-component-basics.md) first — a
 short translation guide from general programming knowledge to Svelte's specific syntax
 (props, `{#each}`/`{#if}`, and just enough of a preview of `$state`/`$derived` to get through
 this assignment before we cover reactivity properly next lesson).

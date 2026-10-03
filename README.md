@@ -68,12 +68,12 @@ Dummy clients to log in with (password `supersecret1`): `noor@example.com`, `sam
 
 - [`docs/design.md`](./docs/design.md) — the design spec for the site: what we're building,
   why, grounded in the interview transcripts.
-- [`docs/assignment-1.md`](./docs/assignment-1.md) — the assignment: refactor the monolithic
+- [`docs/assignments/assignment-1.md`](./docs/assignments/assignment-1.md) — the assignment: refactor the monolithic
   `src/App.svelte` homepage into a proper component structure.
 
 ## Lesson 4 — Loading data from a service
 
-- [`docs/assignment-4.md`](./docs/assignment-4.md) — the assignment: load data from the vets
+- [`docs/assignments/assignment-4.md`](./docs/assignments/assignment-4.md) — the assignment: load data from the vets
   service in a page (`load` in `+page.server.ts`) and in a component (`onMount`), compare the
   consequences of both choices, and type the API data correctly.
 - The booking page (`/book-appointment`) is the worked example: the vets are loaded by the
@@ -81,13 +81,11 @@ Dummy clients to log in with (password `supersecret1`): `noor@example.com`, `sam
 
 ## Lesson 5 — Logging in to the client portal
 
-- [`docs/assignment-5.md`](./docs/assignment-5.md) — the assignment: add a login (form action +
+- [`docs/assignments/assignment-5.md`](./docs/assignments/assignment-5.md) — the assignment: add a login (form action +
   httpOnly cookie), and load the logged-in user's pets in the client portal through the API
   gateway.
-- [`docs/slides.md`](./docs/slides.md) — slides for the 90-minute lesson: concepts, then Parts A–D
-  step by step.
-- All pages are ready (`/login`, `/portal`, `/logout`); students fill in the `TODO`s in the
-  server files. Until then, the portal shows dummy data from `data.ts`.
+- All pages are ready (`/login`, `/portal`, `/logout`), and so is `hooks.server.ts`; students
+  fill in the `TODO`s in the other server files. Until then, the portal shows dummy data from `data.ts`.
 
 ## Project structure
 
@@ -115,18 +113,18 @@ svelte/              # the SvelteKit app — run npm commands from here
         molecules/      # ServiceCard, AppointmentTypeSelect, ...
         organisms/      # SiteHeader, ServicesSection, ...
 services/            # ExpressJS services used by the Svelte app
-  vets_service/      # treatments, vets and appointment types (Express + Prisma + SQLite)
+  api-gateway-service/  # single entry point; checks logins, forwards to the services below
+  auth-service/         # accounts, login, tokens (Express + Prisma + SQLite)
+  vets_service/         # vets, treatments, appointment types, owners and pets (Express + Prisma + SQLite)
 docs/
   design.md          # design spec for the site
-  assignment-1.md     # Lesson 1 assignment
-  assignment-4.md     # Lesson 4 assignment
-  screenshots/        # reference renders of the approved design
-  steps/              # step-by-step lesson walkthrough
-  submissions/         # reference solution + student submissions
+  assignments/       # one assignment per lesson (assignment-1.md, -4.md, -5.md)
+  cheatsheet/        # svelte-component-basics.md
+  screenshots/       # reference renders of the approved design
 ```
 
 > The code started as a plain Vite+Svelte app and was later migrated to SvelteKit. The Lesson 1
-> docs (`docs/assignment-1.md`, `docs/submissions/reference-solution-notes.md`) still refer to
+> docs (`docs/assignments/assignment-1.md`, `docs/design.md`) still refer to
 > `src/App.svelte` — that file no longer exists; its content now lives in
 > `svelte/src/routes/+page.svelte`. See git history for the original.
 >
