@@ -1,13 +1,13 @@
 # Assignment 4 — Loading data from a service
 
-**Case:** Kliniek Van Dijk (see [`design.md`](./design.md))
-**Stack:** SvelteKit + Svelte 5 + TypeScript, ExpressJS service in [`services/vets_service`](../services/vets_service)
+**Case:** Kliniek Van Dijk (see [`design.md`](../design.md))
+**Stack:** SvelteKit + Svelte 5 + TypeScript, ExpressJS service in [`services/vets_service`](../../services/vets_service)
 **Format:** starts in the lesson, finishes as homework
 
 ## Context
 
 Until now, all content on the site came from a hard-coded file:
-[`svelte/src/lib/data.ts`](../svelte/src/lib/data.ts). That was fine for building components, but
+[`svelte/src/lib/data.ts`](../../svelte/src/lib/data.ts). That was fine for building components, but
 the practice wants to manage its treatments, vets and appointment types itself, without asking a
 developer to edit a TypeScript file. That data now lives in a database behind an ExpressJS
 service, the **vets service**, which runs on `http://localhost:4000`:
@@ -18,7 +18,7 @@ service, the **vets service**, which runs on `http://localhost:4000`:
 | `GET /vets` | all vets |
 | `GET /appointment-types` | all appointment types |
 
-The booking page ([`/book-appointment`](../svelte/src/routes/book-appointment)) already loads its
+The booking page ([`/book-appointment`](../../svelte/src/routes/book-appointment)) already loads its
 data from this service, and does it in **two different ways on purpose**:
 
 - the **vets** are loaded by the **page**, on the server, before anything is rendered;
@@ -82,7 +82,7 @@ server imports from `$env/static/private`; code that runs in the browser can onl
 
 A route can have a `+page.server.ts` file next to its `+page.svelte`. SvelteKit calls its `load`
 function **on the server, before the page is rendered**, and hands the result to the page as
-`data`. See [`book-appointment/+page.server.ts`](../svelte/src/routes/book-appointment/+page.server.ts):
+`data`. See [`book-appointment/+page.server.ts`](../../svelte/src/routes/book-appointment/+page.server.ts):
 
 ```ts
 export const load: PageServerLoad = async ({ fetch }) => {
@@ -98,7 +98,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 ```
 
 The page receives it and passes it down as a prop, like any other data
-([`book-appointment/+page.svelte`](../svelte/src/routes/book-appointment/+page.svelte)):
+([`book-appointment/+page.svelte`](../../svelte/src/routes/book-appointment/+page.svelte)):
 
 ```svelte
 <script lang="ts">
@@ -113,7 +113,7 @@ The page receives it and passes it down as a prop, like any other data
 
 A component can also fetch its own data. `onMount` runs **once, in the browser, after the
 component is on the screen**. See
-[`AppointmentTypeSelect.svelte`](../svelte/src/lib/components/molecules/AppointmentTypeSelect.svelte):
+[`AppointmentTypeSelect.svelte`](../../svelte/src/lib/components/molecules/AppointmentTypeSelect.svelte):
 
 ```ts
 let types: AppointmentType[] = $state([]);
@@ -195,7 +195,7 @@ to tell it — carefully.
    clean.
 
 The service has its own copy of these types in
-[`services/vets_service/src/types/index.ts`](../services/vets_service/src/types/index.ts). For now
+[`services/vets_service/src/types/index.ts`](../../services/vets_service/src/types/index.ts). For now
 we keep a separate copy in the frontend and keep them in sync by hand. Think about what could go
 wrong with that — it's one of the reflection questions.
 
@@ -205,8 +205,8 @@ wrong with that — it's one of the reflection questions.
 
 Work in pairs. Start both the service and the Svelte app, and open `/book-appointment`.
 
-1. Read [`+page.server.ts`](../svelte/src/routes/book-appointment/+page.server.ts) and
-   [`AppointmentTypeSelect.svelte`](../svelte/src/lib/components/molecules/AppointmentTypeSelect.svelte).
+1. Read [`+page.server.ts`](../../svelte/src/routes/book-appointment/+page.server.ts) and
+   [`AppointmentTypeSelect.svelte`](../../svelte/src/lib/components/molecules/AppointmentTypeSelect.svelte).
    For both, write down: *where* does the code run, and *when*?
 2. Run these experiments and write down what you see:
    1. Right-click → **View page source**. Search for a vet's name, then for "Vaccination".

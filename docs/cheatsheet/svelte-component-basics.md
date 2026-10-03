@@ -2,7 +2,7 @@
 
 You already know how to program — this is a translation guide from "general programming
 knowledge" to "Svelte specifically," covering the minimum you need for
-[Assignment 1](./assignment-1.md). It is not a full Svelte course. For that, Svelte's own
+[Assignment 1](../assignments/assignment-1.md). It is not a full Svelte course. For that, Svelte's own
 interactive tutorial ([svelte.dev/tutorial](https://svelte.dev/tutorial)) is excellent and
 worth doing properly at some point — just not a blocker for getting started here.
 

@@ -1,18 +1,17 @@
 # Assignment 5 — Logging in to the client portal
 
-**Case:** Kliniek Van Dijk (see [`design.md`](./design.md))
-**Stack:** SvelteKit + Svelte 5 + TypeScript, ExpressJS services in [`services/`](../services)
+**Case:** Kliniek Van Dijk (see [`design.md`](../design.md))
+**Stack:** SvelteKit + Svelte 5 + TypeScript, ExpressJS services in [`services/`](../../services)
 **Format:** one lesson of 90 minutes (Parts A–D); the reflection is homework
-**Slides:** [`slides.md`](./slides.md)
 
 ## Context
 
 Noor de Boer once stood at a specialist's desk without knowing which medication her cat Roos
 had been given. The client portal is the answer to that story: a place where clients see their
-own pets' records, in plain language (see [`design.md`](./design.md)).
+own pets' records, in plain language (see [`design.md`](../design.md)).
 
-A portal page already exists: [`/portal`](../svelte/src/routes/portal). But it shows **dummy
-data** from [`data.ts`](../svelte/src/lib/data.ts), and anyone can open it. Personal data like
+A portal page already exists: [`/portal`](../../svelte/src/routes/portal). But it shows **dummy
+data** from [`data.ts`](../../svelte/src/lib/data.ts), and anyone can open it. Personal data like
 this should only be visible to the owner, so the portal needs a **login**.
 
 The backend is ready for it. Since the last lesson there are three services, and the frontend
@@ -41,15 +40,15 @@ code**, following the `TODO` comments:
 
 | File | Status |
 | --- | --- |
-| [`routes/login/+page.svelte`](../svelte/src/routes/login/+page.svelte) | ready: the login form, shows the error message, keeps the email |
-| [`routes/login/+page.server.ts`](../svelte/src/routes/login/+page.server.ts) | **Part B:** the login action |
-| [`app.d.ts`](../svelte/src/app.d.ts) | ready: the type of `event.locals` |
-| [`hooks.server.ts`](../svelte/src/hooks.server.ts) | **Part C:** read the cookie |
-| [`routes/portal/+page.svelte`](../svelte/src/routes/portal/+page.svelte) | ready: shows `data.email` and `data.pets` |
-| [`routes/portal/+page.server.ts`](../svelte/src/routes/portal/+page.server.ts) | **Part C:** load the pets (returns dummy data for now) |
-| [`routes/logout/+page.server.ts`](../svelte/src/routes/logout/+page.server.ts) | **Part D:** delete the cookie |
+| [`routes/login/+page.svelte`](../../svelte/src/routes/login/+page.svelte) | ready: the login form, shows the error message, keeps the email |
+| [`routes/login/+page.server.ts`](../../svelte/src/routes/login/+page.server.ts) | **Part B:** the login action |
+| [`app.d.ts`](../../svelte/src/app.d.ts) | ready: the type of `event.locals` |
+| [`hooks.server.ts`](../../svelte/src/hooks.server.ts) | ready: reads the token cookie into `event.locals.token` |
+| [`routes/portal/+page.svelte`](../../svelte/src/routes/portal/+page.svelte) | ready: shows `data.email` and `data.pets` |
+| [`routes/portal/+page.server.ts`](../../svelte/src/routes/portal/+page.server.ts) | **Part C:** load the pets (returns dummy data for now) |
+| [`routes/logout/+page.server.ts`](../../svelte/src/routes/logout/+page.server.ts) | **Part D:** delete the cookie |
 | `PortalSection` (with a log out button), `PetCard` | ready: no changes needed |
-| [`lib/data.ts`](../svelte/src/lib/data.ts) | ready: `Pet`, `User` and `LoginResponse` interfaces |
+| [`lib/data.ts`](../../svelte/src/lib/data.ts) | ready: `Pet`, `User` and `LoginResponse` interfaces |
 
 ## Lesson plan
 
@@ -59,8 +58,8 @@ code**, following the `TODO` comments:
 | 10–25 | Part A: explore the login |
 | 25–33 | Concepts: form actions and cookies |
 | 33–53 | Part B: the login page |
-| 53–60 | Concepts: hooks, `locals`, protected pages |
-| 60–80 | Part C: connect the portal |
+| 53–57 | Concepts: hooks, `locals`, protected pages |
+| 57–80 | Part C: connect the portal |
 | 80–90 | Part D: log out · wrap-up |
 
 ## Learning objectives
@@ -71,8 +70,8 @@ By the end of this assignment you can:
    checks it, and how a service knows *who* is asking.
 2. Build a login form with a SvelteKit **form action** (`+page.server.ts`), including validation
    errors with `fail()` and a `redirect()` after success.
-3. Store a token in an **httpOnly cookie** and read it on every request in `hooks.server.ts`,
-   using `event.locals`.
+3. Store a token in an **httpOnly cookie**, and explain how `hooks.server.ts` makes it available
+   to every server function through `event.locals`.
 4. Load personal data in a `load` function by sending the token to the API, and handle a user
    who isn't logged in (anymore).
 5. Argue where a token should be stored, and why the frontend must never decide *whose* data it
@@ -147,8 +146,8 @@ If you copied `.env` in an earlier lesson, check that it says `3000`, not `4000`
    with that email.
 
 The login email is what links an account in auth-service to an owner in vets_service. See
-[`authenticate.ts`](../services/api-gateway-service/src/middleware/authenticate.ts) and
-[`my.ts`](../services/vets_service/src/routes/my.ts).
+[`authenticate.ts`](../../services/api-gateway-service/src/middleware/authenticate.ts) and
+[`my.ts`](../../services/vets_service/src/routes/my.ts).
 
 > **A token is signed, not secret.** Anyone can read what's inside a JWT; the signature only
 > proves nobody changed it. That's why it holds an email and a role, never a password.
@@ -272,7 +271,7 @@ extension in VS Code, Postman or Bruno.
 
 The login page at `/login` is ready; submitting it now shows *"Logging in is not built yet"*.
 Fill in the `TODO`s in
-[`routes/login/+page.server.ts`](../svelte/src/routes/login/+page.server.ts):
+[`routes/login/+page.server.ts`](../../svelte/src/routes/login/+page.server.ts):
 
 1. When the email or password is empty, return `fail(400, …)` with a message in plain language.
 2. Send the email and password to `POST {VET_SERVICE_API_URL}/auth/login` (a JSON body).
@@ -294,9 +293,10 @@ Test it:
 
 Now replace the dummy data with the real pets of the logged-in user.
 
-1. In [`hooks.server.ts`](../svelte/src/hooks.server.ts), read the `token` cookie and put it on
-   `event.locals.token`. (The type is already declared in `app.d.ts`.)
-2. In [`routes/portal/+page.server.ts`](../svelte/src/routes/portal/+page.server.ts), redirect to
+1. Read [`hooks.server.ts`](../../svelte/src/hooks.server.ts) (ready-made): it reads the `token`
+   cookie on every request and puts it on `event.locals.token`. Where is its type declared? What
+   is `locals.token` when nobody is logged in?
+2. In [`routes/portal/+page.server.ts`](../../svelte/src/routes/portal/+page.server.ts), redirect to
    `/login` when there is no token.
 3. Fetch `GET /my/pets` from the gateway with the header `Authorization: Bearer <token>`. When the
    gateway answers `401` (the token expired or is invalid), delete the cookie and redirect to
@@ -313,7 +313,7 @@ yourself why.
 
 The portal already has a "Log out" button: a form (`method="POST"`) that posts to `/logout`.
 
-1. Fill in the `TODO` in [`routes/logout/+page.server.ts`](../svelte/src/routes/logout/+page.server.ts):
+1. Fill in the `TODO` in [`routes/logout/+page.server.ts`](../../svelte/src/routes/logout/+page.server.ts):
    delete the cookie. The redirect to the homepage is already there.
 2. Check that `/portal` sends you to `/login` again after logging out.
 3. Why is log out a form and not a link? (Think about what a browser or a link preview does with
@@ -327,7 +327,7 @@ The portal already has a "Log out" button: a form (`method="POST"`) that posts t
   token.
 - **TypeScript everywhere, no `any`.** `event.locals` is typed in `app.d.ts`, API responses have
   an interface. `npm run check` and `npm run build` are clean.
-- **Plain language** (see the accessibility requirements in [`design.md`](./design.md)): error
+- **Plain language** (see the accessibility requirements in [`design.md`](../design.md)): error
   messages say what to do ("Check your email address and password and try again"), no technical
   jargon like "401".
 - **Components stay presentational.** Only `+page.server.ts` files and the hook talk to the API.
@@ -337,7 +337,7 @@ The portal already has a "Log out" button: a form (`method="POST"`) that posts t
 1. Your Part A answers (see above).
 2. A branch/PR (or the submission method your instructor specifies) containing:
    - the login action (Part B),
-   - `hooks.server.ts` and the connected portal (Part C),
+   - the connected portal (Part C),
    - the logout action (Part D),
    - no leftover dummy data that nothing uses,
    - a clean `npm run check` and `npm run build`.
